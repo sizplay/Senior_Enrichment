@@ -5,12 +5,18 @@ const port = process.env.PORT || 3000;
 const volleyball = require('volleyball');
 const { conn } = require('./server/db/models');
 
+
 app.use(volleyball);
-//app.use(body)
+app.use(require('body-parser').json());
+app.use(require('body-parser').urlencoded({ extended: true }));
 
 app.use('/api', require('./server/router'));
-app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
+
+app.use(express.static(path.join(__dirname, './public')))
+app.use(express.static(path.join(__dirname, './node_modules')))
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
+//app.use('/public/stylesheets', express.static(path.join(__dirname, 'main.css')));
+app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'public/index.html')));
 
 conn.sync()
   .then(()=>{

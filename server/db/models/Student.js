@@ -23,7 +23,6 @@ const Student = conn.define('students', {
   },
   photo: {
     type: Sequelize.STRING,
-    defaultValue: '/images/default-photo.jpg'
   }
 }, {
     getterMethods: {

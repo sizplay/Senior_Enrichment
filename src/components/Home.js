@@ -5,6 +5,7 @@ import { fetchCampuses, fetchStudents } from '../store';
 
 import Nav from './Nav';
 import StudentsList from './Student/StudentsList';
+import Student from './Student/Student';
 
 class Home extends Component {
   componentDidMount() {
@@ -18,7 +19,8 @@ class Home extends Component {
         <Router>
           <div>
             <Nav />
-            <Route exact path='/students' render={({ history }) => <StudentsList history ={history}/>} />
+            <Route exact path='/students' render={({ history }) => <StudentsList history ={history} />} />
+            <Route exact path='/students/:id' render={({ match, history }) => <Student id={match.params.id*1} history={history} />} />
           </div>
         </Router>
       </div>

@@ -1,0 +1,53 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-bottom: 110px;
+  min-height: 100%;
+  background: repeating-radial-gradient(45deg, #e3e3e3 0px, #e3e3e3 10px, #ccc 1px, #ccc 11px);
+}
+
+h4 {
+  color:black;
+}
+
+.tucked {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#allStudent_btn {
+  border-radius:4px;
+  float: right;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+#allStudent_btn:hover {
+  color:cyan;
+}
+
+#studentImg {
+  width: 450px;
+  height: 410px;
+}
+
+h1, h2, h3, h4, h5, h6, div {
+  font-family: 'Verdana';
+}
+
+#studentFullName {
+  background-color: rgb(233, 233, 233);
+}
+
+#submitBtn {
+  margin-top: 4px;
+  border-radius: 4px;
+  float: right;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}

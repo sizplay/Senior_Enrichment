@@ -1,8 +1,9 @@
 const toonAvatar = require('cartoon-avatar');
 const chance = require('chance')(123);
 const Promise = require('bluebird');
+const coolimages = require('cool-images');
 
-const { conn, Student, Campus } = require('./db/models');
+const { conn, Student, Campus } = require('./server/db/models');
 
 const numStudents = 100;
 
@@ -34,10 +35,12 @@ function randStudent(createdCampus) {
   });
 }
 
+const manyCoolimages = coolimages.many();
+
 function randCampus() {
   return Campus.build({
     name: chance.word(),
-    imageUrl: 'http://',
+    imageUrl: manyCoolimages.pop(),
     description: chance.paragraph()
   });
 }
