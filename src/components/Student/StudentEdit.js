@@ -1,16 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateStudent, deleteStudent } from '../../redux/students';
-import { Link } from 'react-router-dom';
 
-class Student extends React.Component {
+class StudentEdit extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = this.studentState(this.props);
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onSubmitCampus = this.onSubmitCampus.bind(this);
+
+    this.validators = {
+      firstName: (value) => {
+        if (!value) {
+          return 'first name is required';
+        }
+      },
+      lastName: (value) => {
+        if (!value) {
+          return 'last name is required';
+        }
+      },
+      email: (value) => {
+        if (!value) {
+          return 'email is required';
+        }
+      },
+      gpa: (value) => {
+        if (!value) {
+          return 'gpa is required';
+        }
+      }
+    };
   }
 
   studentState(props) {
@@ -18,8 +41,9 @@ class Student extends React.Component {
       firstName: props.student ? props.student.firstName : '',
       lastName: props.student ? props.student.lastName : '',
       email: props.student ? props.student.email : '',
-      gpa: props.student ? props.student.gpa*1 : '',
+      gpa: props.student ? props.student.gpa * 1 : '',
       campus_id: props.student ? props.student.campus_id : '',
+      errors: {}
     }
   }
 
@@ -37,6 +61,42 @@ class Student extends React.Component {
     if (student) {
       this.props.updateStudent(student);
     }
+  }
+
+  onSubmit(ev) {
+    ev.preventDefault();
+
+    const errors = Object.keys(this.validators).reduce((result, key) => {
+      const validator = this.validators[key];
+      const value = this.state[key];
+      const error = validator(value);
+      if (error) {
+        result[key] = error;
+      }
+      return result;
+    }, {});
+
+    this.setState({ errors });
+    if (Object.keys(errors).length) {
+      return;
+    }
+
+
+    const student = {
+      id: this.props.id,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      gpa: this.state.gpa
+    }
+    if (student) {
+      this.props.updateStudent(student);
+    }
+  }
+
+  //after refresh input field, data still be there.!!!
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.studentState(nextProps));
   }
 
   render() {
@@ -75,16 +135,42 @@ class Student extends React.Component {
     return (
       <div className='col-sm-7 ho' id='studentFullName'>
         <h1 className='text-center'>{student.fullName}</h1>
+        <form className='form-group' onSubmit={this.onSubmit}>
           <h4>First Name</h4>
-          <h4>{student.firstName}</h4>
+          <input
+            name='firstName'
+            className='form-control'
+            onChange={this.onChange}
+            value={this.state.firstName}
+          />
+          <h3 className='text-danger'>{this.state.errors.firstName}</h3>
           <h4>Last Name</h4>
-          <h4>{student.lastName}</h4>
+          <input
+            name='lastName'
+            className='form-control'
+            onChange={this.onChange}
+            value={this.state.lastName}
+          />
+          <h3 className='text-danger'>{this.state.errors.lastName}</h3>
           <h4>Email</h4>
-          <h4>{student.email}</h4>
+          <input
+            name='email'
+            className='form-control'
+            onChange={this.onChange}
+            value={this.state.email}
+          />
+          <h3 className='text-danger'>{this.state.errors.email}</h3>
           <h4>GPA</h4>
-          <h4>{student.gpa}</h4>
-          <button className='btn btn-primary btn-lg' id='submitBtn'><Link id='Link' to={`/students/${student.id}/edit`}>Update</Link></button>
+          <input
+            name='gpa'
+            className='form-control'
+            onChange={this.onChange}
+            value={this.state.gpa}
+          />
+          <h3 className='text-danger'>{this.state.errors.gpa}</h3>
+          <button className='btn btn-primary btn-lg' id='submitBtn'>Update</button>
           <button className='btn btn-danger btn-lg' id='submitBtn' onClick={this.onDelete}>Delete</button>
+        </form>
       </div>
     );
   }
@@ -113,7 +199,7 @@ class Student extends React.Component {
     if (!campuses) {
       return (
         <div>
-        <h4>there is no campus</h4>
+          <h4>there is no campus</h4>
         </div>
       );
     }
@@ -145,9 +231,9 @@ const mapStateToProps = ({ students, campuses }, { id }) => {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    updateStudent: (student) => dispatch(updateStudent(student)),
-    deleteStudent: (student) => dispatch(deleteStudent(student, history)),
+    updateStudent: (student) => dispatch(updateStudent(student, history)),
+    deleteStudent: (student) => dispatch(deleteStudent(student, history))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Student);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentEdit);

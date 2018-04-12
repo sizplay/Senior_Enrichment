@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Home from './components/Home';
+import Root from './components/Root';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -8,7 +8,7 @@ const root = document.getElementById('root');
 
 render((
   <Provider store={store}>
-    <Home />
+    <Root />
   </Provider>
 ), root);
 

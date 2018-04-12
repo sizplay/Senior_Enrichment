@@ -19,7 +19,13 @@ const Student = conn.define('students', {
     }
   },
   gpa: {
-    type: Sequelize.STRING
+    type: Sequelize.DECIMAL(10,2),
+    validate: {
+      min: 0,
+      max: 4,
+      isDecimal: true
+    }
+
   },
   photo: {
     type: Sequelize.STRING,

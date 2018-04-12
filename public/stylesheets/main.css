@@ -18,16 +18,15 @@ h4 {
   padding-right: 4px;
 }
 
-#allStudent_btn {
+#btn {
   border-radius:4px;
+  margin: auto;
   float: right;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  text-color: white;
 }
 
-#allStudent_btn:hover {
-  color:cyan;
+#btn:hover {
+  background-color: aquamarine;
 }
 
 #studentImg {
@@ -50,4 +49,31 @@ h1, h2, h3, h4, h5, h6, div {
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 5px;
+}
+
+#campusImg {
+  width: 300px;
+  height: 200px;
+}
+
+#studentsImg {
+  padding-top: 10px;
+  padding-left: 35px;
+}
+
+#campusesImg {
+  width: 64px;
+  height: 64px;
+}
+
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  text-decoration: none;
+  color: initial;
+}
+
+#Link {
+  color:white;
+  text-decoration: none;
 }

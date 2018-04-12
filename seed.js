@@ -30,7 +30,7 @@ function randStudent(createdCampus) {
     lastName: chance.last(),
     photo: randPhoto(gender),
     email: emails.pop(),
-    gpa: gpa(),
+    gpa: gpa()*1,
     campus_id: campus.id
   });
 }

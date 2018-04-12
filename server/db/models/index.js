@@ -8,7 +8,6 @@ Campus.hasMany(Student, {
   hooks: true
 });
 
-
 const sync = ()=> {
   return conn.sync({ force: true });
 };

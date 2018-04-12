@@ -1,6 +1,5 @@
 const conn = require('../conn');
 const Sequelize = require('sequelize');
-const Student = require('./Student');
 
 const Campus = conn.define('campuses', {
   name: {
@@ -20,14 +19,3 @@ const Campus = conn.define('campuses', {
 });
 
 module.exports = Campus;
-
-/* , {
-    scopes: {
-      populated: () => ({
-        include: [{
-          model: Student
-        }]
-      })
-    }
-  }
-  */

@@ -1,39 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import { fetchCampuses, fetchStudents } from '../store';
+import React from 'react';
 
-import Nav from './Nav';
-import StudentsList from './Student/StudentsList';
-import Student from './Student/Student';
-
-class Home extends Component {
-  componentDidMount() {
-    this.props.fetchStudents();
-    this.props.fetchCampuses();
-  }
-
-  render() {
-    return (
-      <div className='container-fluid'>
-        <Router>
-          <div>
-            <Nav />
-            <Route exact path='/students' render={({ history }) => <StudentsList history ={history} />} />
-            <Route exact path='/students/:id' render={({ match, history }) => <Student id={match.params.id*1} history={history} />} />
-          </div>
-        </Router>
+const Home = () => {
+  return (
+    <div className='container'>
+      <div className='panel panel-default'>
+        <div className='text-center'>
+          <h2>Welcome to Senior Enrichment Project.</h2>
+          <h5>this project has Students and Campuses</h5>
+          <p>
+          I have some issues. <br /> 1. Please refresh /students page after deleting a Campus. <br />
+          2. Please click text in some buttons instead of edge of the buttons.<br />
+          3. When you validate student GPA, it is only validated for empty. <br /> it should be validated for not number and min 0 to max 4. <br /> Please use seed file when you need data.
+          </p>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-const mapDispatchToProps = (dispatch)=> {
-    return {
-      fetchStudents: () => dispatch(fetchStudents()),
-      fetchCampuses: () => dispatch(fetchCampuses())
-    }
-}
-
-export default connect(null, mapDispatchToProps)(Home);
-
+export default Home;
