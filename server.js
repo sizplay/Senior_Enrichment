@@ -15,7 +15,7 @@ app.use('/api', require('./server/router'));
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './node_modules')))
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
-//app.use('/public/stylesheets', express.static(path.join(__dirname, 'main.css')));
+
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'public/index.html')));
 
 conn.sync()

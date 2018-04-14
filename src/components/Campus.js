@@ -20,15 +20,6 @@ class Campus extends React.Component {
   }
 
   onDelete() {
-    // if (this.props.filteredStudents) {
-    //   this.setState(this.props.filteredStudents);
-    //   this.state.filteredStudents.foreach(student => {
-    //     this.props.updateStudent({
-    //       id: student.id,
-    //       campus_id: null
-    //     })
-    //   })
-    // }
     this.props.deleteCampus({ id: this.props.id })
   }
 
