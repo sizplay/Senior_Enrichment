@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateStudent, deleteStudent } from '../redux/students';
+import { updateStudent } from '../redux/students';
 import { updateCampus } from '../redux/campuses'
 
 class CampusEdit extends React.Component {
@@ -80,8 +80,12 @@ class CampusEdit extends React.Component {
     }
   }
 
-  onDeleteStudent(id) {
-    this.props.deleteStudent({ id });
+  onDeleteStudent(ev, id) {
+    ev.preventDefault();
+    const student = { campus_id: '', id: id };
+    if (student) {
+      this.props.updateStudent(student);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -202,8 +206,7 @@ const mapStateToProps = ({ campuses, students }, { id }) => {
 const mapDispatchToProps = (dispatch, { history, id }) => {
   return {
     updateCampus: (campus) => dispatch(updateCampus(campus, history, id)),
-    updateStudent: (student) => dispatch(updateStudent(student)),
-    deleteStudent: (student) => dispatch(deleteStudent(student))
+    updateStudent: (student) => dispatch(updateStudent(student))
   }
 }
 

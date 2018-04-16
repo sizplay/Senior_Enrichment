@@ -168,7 +168,7 @@ class StudentEdit extends React.Component {
             value={this.state.gpa}
           />
           <h3 className='text-danger'>{this.state.errors.gpa}</h3>
-          <button className='btn btn-primary btn-lg' id='submitBtn'>Update</button>
+          <button onClick={this.onSubmit} className='btn btn-primary btn-lg' id='submitBtn'>Update</button>
           <button className='btn btn-danger btn-lg' id='submitBtn' onClick={this.onDelete}>Delete</button>
         </form>
       </div>
